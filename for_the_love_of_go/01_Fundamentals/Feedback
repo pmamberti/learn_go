@@ -1,0 +1,7 @@
+Chapter 3.
+Stretch Goal: I like this! A couple of small suggestions, from a beginner perspective:
+
+- As a general approach, I think it would be nice to have here a little bit more of handholding. My reasoning is that being this content oriented to people new to Go (and programming in general) you are assuming people know how to find and navigate the documentation of a language, which is not necessarily true. 
+- Following from that, the 'potentially useful' question is confusing, how am I supposed to know what makes a certain method useful or not?
+
+I don't think you should 'feed' us the solution but rather give more pointers to clarify the mindset needed to approach this. An example could be: "This is a new function that you see for the first time, you should have a look at the docs (link), while at it, can you see other methods that could do "X", why do you think that would be useful?'
