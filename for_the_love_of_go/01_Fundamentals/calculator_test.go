@@ -67,10 +67,10 @@ func TestMultiply(t *testing.T) {
 func TestDivide(t *testing.T) {
 
 	testCases := []testCase{
-		{a: 6, b: 0, want: 999, description: "6 / 0 = Nan", errExpected: false},
-		{a: 5, b: 0, want: 0, description: "5 / 0 = NaN", errExpected: true},
-		{a: 5, b: 3, want: 1.666, description: "5 / 3 = 1.666", errExpected: true},
-		{a: 1, b: 2, want: 2, description: "1 / 2 = 0.5", errExpected: false},
+		{a: 6, b: 0, want: 999, description: "Division by 0", errExpected: true},
+		{a: 9, b: 3, want: 3, description: "9 / 3 = 3", errExpected: false},
+		{a: -9, b: 3, want: -3, description: "-9 / 3  = -3", errExpected: false},
+		{a: 9, b: 3, want: 3, description: "1 / 2 = 0.5", errExpected: false},
 	}
 
 	for _, tc := range testCases {
@@ -78,10 +78,13 @@ func TestDivide(t *testing.T) {
 		errReceived := err != nil
 
 		if tc.errExpected != errReceived {
-			t.Errorf("Divide(%f, %f: Expected Error Status: %v - Received Error status: %v",
-				tc.a, tc.b, tc.errExpected, err)
+			t.Fatalf("Divide(%.0f, %.0f: unexpected error status: %v",
+				tc.a, tc.b, errReceived)
 		}
 
-		fmt.Printf("%f", got)
+		if !tc.errExpected && tc.want != got {
+			fmt.Printf("Expected test: %s\n", tc.description)
+			t.Errorf("want %f, got %f", tc.want, got)
+		}
 	}
 }
