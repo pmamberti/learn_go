@@ -9,16 +9,16 @@ type Book struct {
 	Series          string
 	SeriesNumber    int
 	Copies          int
-	PriceCents      int
-	DiscountPercent int
-	FinalPrice      int
+	PriceCents      float64
+	DiscountPercent float64
+	FinalPrice      float64
 	Edition         bool
 }
 
 // NetPrice calculates the price of the book after the discount
-func NetPrice(a Book) int {
+func NetPrice(a Book) float64 {
 	netDiscount := a.PriceCents * a.DiscountPercent / 100
-	return a.PriceCents - netDiscount
+	return (a.PriceCents - netDiscount) / 100
 }
 
 func main() {
@@ -35,6 +35,14 @@ func main() {
 
 	b.FinalPrice = NetPrice(b)
 
-	fmt.Printf("Author: %v\nSeries: %v\nTitle: %v\nNumber in Series: %v\nPrice: %v USD\nDiscount: %v%\nFinal Price: %v\n", b.Author, b.Series, b.Title, b.SeriesNumber, b.PriceCents/100, b.DiscountPercent, b.FinalPrice)
-	fmt.Println(b.Edition)
+	fmt.Printf(`
+	Author: %v
+	Series: %v
+	Title: %v
+	Number in Series: %v
+	
+	Price: %v USD
+	Discount: %v
+	---------------
+	Final Price: %.2f USD`, b.Author, b.Series, b.Title, b.SeriesNumber, b.PriceCents/100, b.DiscountPercent, b.FinalPrice)
 }
