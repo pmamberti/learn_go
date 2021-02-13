@@ -1,17 +1,23 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	var title string
-	var copies int
-	var author string
-	title = "The Happiness Project"
-	copies = 99
-	author = "Stephen King"
-	fmt.Println(title)
-	fmt.Println(copies)
-	fmt.Println(author)
+
+	// Book represents information about a book
+	type Book struct {
+		Title        string
+		Author       string
+		Series       string
+		SeriesNumber int
+	}
+
+	var b = Book{
+		Title:        "Fundamentals",
+		Author:       "John Arundel",
+		Series:       "For the Love of Go",
+		SeriesNumber: 1,
+	}
+
+	fmt.Println(b)
 }
