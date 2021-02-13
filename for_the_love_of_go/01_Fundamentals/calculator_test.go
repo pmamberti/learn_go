@@ -70,7 +70,7 @@ func TestDivide(t *testing.T) {
 		{a: 6, b: 0, want: 999, description: "Division by 0", errExpected: true},
 		{a: 9, b: 3, want: 3, description: "9 / 3 = 3", errExpected: false},
 		{a: -9, b: 3, want: -3, description: "-9 / 3  = -3", errExpected: false},
-		{a: 9, b: 3, want: 3, description: "1 / 2 = 0.5", errExpected: false},
+		{a: 0, b: 3, want: 0, description: "0 / 3 = 0", errExpected: false}
 	}
 
 	for _, tc := range testCases {
@@ -85,6 +85,29 @@ func TestDivide(t *testing.T) {
 		if !tc.errExpected && tc.want != got {
 			fmt.Printf("Expected test: %s\n", tc.description)
 			t.Errorf("want %f, got %f", tc.want, got)
+		}
+	}
+}
+
+func TestSqrt(t *testing.T) {
+
+	testCases := []testCase{
+		{a: 9, want: 3, description: "Sqrt(9) = 3", errExpected: false},
+		{a: 0, want: 0, description: "Sqrt(0) = 0", errExpected: false},
+		{a: -1, want: 777, description: "Sqrt(-1) = no good", errExpected: true},
+	}
+
+	for _, tc := range testCases {
+		got, err := calculator.Sqrt(tc.a)
+		errReceived := err != nil
+
+		if tc.errExpected != errReceived {
+			t.Fatalf("Square Root of %.0f: unexpected error status: %v\n", tc.a, errReceived)
+		}
+
+		if !tc.errExpected && tc.want != got {
+			fmt.Printf("Expected test: %s %f\n", tc.description, tc.a)
+			t.Errorf("b - want %f, got %f", tc.want, got)
 		}
 	}
 }
